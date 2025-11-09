@@ -3,7 +3,6 @@ module marketflow {
 	requires javafx.fxml;
 	requires javafx.graphics;
 	requires javafx.media;
-    requires de.jensd.fx.glyphs.fontawesome;
 
-    opens dev.luggers to javafx.fxml, javafx.graphics, javafx.media;
+    opens dev.luggers to javafx.controls, javafx.fxml, javafx.graphics, javafx.media;
 }

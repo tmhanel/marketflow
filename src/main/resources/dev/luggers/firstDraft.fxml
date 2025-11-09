@@ -18,11 +18,11 @@
            maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
            prefHeight="776.0" prefWidth="912.0"
            xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-           stylesheets="@style.css" >
+           >
    <children>
       <ImageView fx:id="background"  >
          <image>
-            <Image url="@isar.png" />
+            
          </image>
       </ImageView>
        <AnchorPane fx:id="buttonPane" >

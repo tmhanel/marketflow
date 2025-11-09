@@ -18,11 +18,15 @@ public class Marketflow extends Application {
 	private Scene tutorialScene;
 	FXMLLoader gameLoader;
 	FXMLLoader tutorialLoader;
-
+	
+	public static void main(String[] args) {
+        Marketflow.launch(args);
+    }
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		gameLoader = new FXMLLoader(getClass().getResource("firstDraft.fxml"));
-		gameScene = new Scene(gameLoader.load());
+		gameLoader = new FXMLLoader();
+		gameScene = new Scene(gameLoader.load(getClass().getResourceAsStream("firstDraft.fxml")));
 		tutorialLoader = new FXMLLoader(getClass().getResource("tutorial.fxml"));
 		tutorialScene = new Scene(tutorialLoader.load());
 		Button button = new Button("Simulation Starten");
@@ -32,7 +36,7 @@ public class Marketflow extends Application {
 			primaryStage.setScene(gameScene);
 		});
 		Parent root = tutorialLoader.getRoot();
-		ImageView backgroundImage = (ImageView) root.lookup("#tutorialImage");
+		ImageView backgroundImage =  new ImageView(this.getClass().getResource("/dev/luggers/isar.png").toExternalForm());
 		backgroundImage.fitWidthProperty().bind(((Pane) root).widthProperty());
 		backgroundImage.fitHeightProperty().bind(((Pane) root).heightProperty());
 		((Pane) root).getChildren().add(button);

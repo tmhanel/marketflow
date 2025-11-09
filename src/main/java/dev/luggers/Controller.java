@@ -3,8 +3,6 @@ package dev.luggers;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -321,6 +319,7 @@ public class Controller {
 	}
 
 	public void warnIconConfig(Button button, Powerplant powerplant) {
+	    /*
 		FontAwesomeIconView warnIcon = new FontAwesomeIconView(FontAwesomeIcon.EXCLAMATION_TRIANGLE);
 		warnIcon.setVisible(false);
 		warnIcon.translateXProperty().bind(button.translateXProperty().multiply(0.99));
@@ -341,8 +340,9 @@ public class Controller {
 			}
 		});
 		mainPane.getChildren().add(warnIcon);
+		*/
 	}
-
+/*
 	private Timeline iconPulseConfig(FontAwesomeIconView icon) {
 		icon.setFill(Color.ORANGERED);
 		icon.setOpacity(0.0);
@@ -362,6 +362,7 @@ public class Controller {
 		pulse.setCycleCount(Animation.INDEFINITE);
 		return pulse;
 	}
+	*/
 
 	private void enableSliderColor(Slider slider) {
 		slider.skinProperty().addListener((_, _, newSkin) -> {
