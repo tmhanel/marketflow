@@ -14,7 +14,7 @@ public class EnergyPriceRepository {
 
 	public EnergyPriceRepository() {
 		try {
-			pricePath = Paths.get(Objects.requireNonNull(getClass().getResource("/energyPrice.csv")).toURI());
+			pricePath = Paths.get(Objects.requireNonNull(getClass().getResource("energyPrice.csv")).toURI());
 		} catch (URISyntaxException e) {
 			throw new RuntimeException(e);
 		}

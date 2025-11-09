@@ -18,7 +18,7 @@ public class InflowRepository {
 
 	public InflowRepository() {
 		try {
-			inflowPath = Paths.get((Objects.requireNonNull(getClass().getResource("/inflow.csv"))).toURI());
+			inflowPath = Paths.get((Objects.requireNonNull(getClass().getResource("inflow.csv"))).toURI());
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}

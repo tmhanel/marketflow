@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>luggers.dev</groupId>
     <artifactId>marketflow</artifactId>
@@ -8,8 +8,10 @@
     <properties>
         <maven.compiler.release>25</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <javafx.version>25</javafx.version>
+        <javafx.version>25.0.1</javafx.version>
         <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
+        <mainclassnameparam>dev.luggers.Marketflow</mainclassnameparam>
+        <launcherparam>dev.luggers.MarketflowLauncher</launcherparam>
     </properties>
     <name>Luggers Powerplant Playground</name>
     <description>This is a giant powerplant simulation, comprising beautiful powerplants, rivers and huge amounts of water. Beautiful water. Great water, like the great water of the Gulf of Luggers. </description>
@@ -103,38 +105,13 @@
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>marketflow/dev.luggers.Application</mainClass>
-                    <!--  jlink options start here:  -->
-                    <stripDebug>true</stripDebug>
-                    <noHeaderFiles>true</noHeaderFiles>
-                    <noManPages>true</noManPages>
-                    <launcher>marketflow</launcher>
-                    <jlinkImageName>marketflow</jlinkImageName>
-                    <jlinkZipName>marketflow</jlinkZipName>
-                    <!--  end of jlink options  -->
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <archive>
-                        <manifest>
-                            <mainClass>dev.luggers.Marketflow</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
                 <executions>
                     <execution>
-                        <id>make-assembly</id> <!-- this is used for inheritance merges -->
-                        <phase>package</phase> <!-- bind to the packaging phase -->
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
+						<!-- Default configuration for running with: mvn clean javafx:run -->
+                        <id>default-cli</id>
+                        <configuration>
+                            <mainClass>${mainclassnameparam}</mainClass>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -145,11 +122,42 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>dev.luggers.Marketflow</mainClass>
+                            <mainClass>${mainclassnameparam}</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution> 
+                    	<phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <filters>
+            <filter>
+                <artifact>*:*</artifact>
+                <excludes>
+                    <exclude>module-info.class</exclude>
+                </excludes>
+            </filter>
+        </filters>
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <mainClass>${mainclassnameparam}</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+           
         </plugins>
     </build>
     <reporting>

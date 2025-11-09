@@ -14,7 +14,7 @@ public class PowerplantFactory {
 
 	private PowerplantFactory() {
 		try {
-			Path path = Paths.get(Objects.requireNonNull(getClass().getResource("/powerplants.csv")).toURI());
+			Path path = Paths.get(Objects.requireNonNull(getClass().getResource("powerplants.csv")).toURI());
 			List<String> lines = Files.readAllLines(path);
 
 			if (lines.isEmpty()) {
